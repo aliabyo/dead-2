@@ -1,8 +1,21 @@
 from flask import Flask
 from threading import Thread
+from highrise import Position
+from highrise.__main__ import *
 from highrise.__main__ import *
 import time
-import os 
+import traceback
+import time
+from highrise.models import (
+    Item,
+    Position,
+    Reaction,
+    SessionMetadata,
+    User,
+    AnchorPosition,
+    CurrencyItem ,
+)
+
 class WebServer():
 
   def __init__(self):
@@ -21,10 +34,13 @@ class WebServer():
 
 
 class RunBot():
-  room_id = "65f580b559ba97fdcb699997"
-  bot_token = "051df02b6f323b9e4613f0bba52e92f9ea27c46b77a637e121c80cafbddff50a"
+   
+
+  room_id = "64dd04fe8d908b29e91d0780"
+  bot_token = "16a69a4c4a6e76687a686316e65df1a1fb74b38e19a9f096bb828d4abb68573e"
   bot_file = "main"
-  bot_class = "Bot"
+  bot_class = "MyBot"
+
   def __init__(self) -> None:
     self.definitions = [
         BotDefinition(
@@ -36,7 +52,7 @@ class RunBot():
     while True:
       try:
         arun(main(self.definitions))
-
+        
       except Exception as e:
         # Print the full traceback for the exception
         import traceback
@@ -44,8 +60,9 @@ class RunBot():
         traceback.print_exc()  # This will print the full traceback
         time.sleep(1)
         continue
+    
 
 if __name__ == "__main__":
   WebServer().keep_alive()
 
-RunBot().run_loop()
+  RunBot().run_loop()
