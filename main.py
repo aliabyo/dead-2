@@ -117,7 +117,7 @@ import contextlib
 import logging
 from highrise import BaseBot, AnchorPosition, Position, User, TaskGroup
 
-moderators = ['Moha22_','TOMY_X']
+moderators = ['Arv.Moon','TOMY_X']
 
 class BotDefinition:
     def __init__(self, bot, room_id, api_token):
@@ -130,7 +130,7 @@ class ResponseError(Exception):
 class Counter:
     bot_id = ""
     static_ctr = 0
-    usernames = ['TOMY_X','Moha22_']
+    usernames = ['TOMY_X','Arv.Moon']
 
 class MyBot(BaseBot):
 
@@ -403,7 +403,7 @@ class MyBot(BaseBot):
           self.moderators = []
 
       # Add default moderators here
-      default_moderators =['TOMY_X','Moha22_']
+      default_moderators =['TOMY_X','Arv.Moon']
       for mod in default_moderators:
           if mod.lower() not in self.moderators:
               self.moderators.append(mod.lower())
@@ -620,18 +620,7 @@ class MyBot(BaseBot):
 
 
 
-    async def on_user_leave(self, user: User) -> None:
-        try:
-        # Your existing code
-            await self.stop_continuous_emote(user.id)
-        except highrise.ResponseError as e:
-        # Handle the error
-            print(f"An error occurred while stopping continuous emote: {str(e)}")
-        # Other error handling logic
-        await asyncio.sleep(5)
-        print(f"{user.username} Left the Room")
-        joke = random.choice([f"Goodbye @{user.username} see you soon✨"])
-        await self.highrise.chat(f"{joke}")
+    
 
 
     async def delayed_message_command(self, message, command):
@@ -1444,7 +1433,7 @@ class MyBot(BaseBot):
 
 
 
-        if message.startswith("kawaii"):
+        if message.startswith("p5"):
           if user.username.lower() in self.moderators:
             roomUsers = (await self.highrise.get_room_users()).content
             for roomUser, _ in roomUsers:
@@ -2379,8 +2368,8 @@ class MyBot(BaseBot):
             await self.highrise.chat("Please enter a valid number after 🌚.")
 
         if message == "-dr":
-          shirt = ["shirt-n_room12019cropsweaterblack"]
-          pant = ["skirt-n_room12019pleatedskirtgrey"]
+          shirt = ["shirt-n_room12019buttondownblack"]
+          pant = ["pants-n_room12019formalslacksblack"]
           item_top = random.choice(shirt)
           item_bottom = random.choice(pant)
           xox = await self.highrise.set_outfit(outfit=[
@@ -2388,14 +2377,14 @@ class MyBot(BaseBot):
                   Item(type='clothing', amount=1, id=item_top, account_bound=False, active_palette=-1),
                   Item(type='clothing', amount=1, id=item_bottom, account_bound=False, active_palette=-1),
                   Item(type='clothing', amount=4, id='nose-n_basic2018newnose15', account_bound=False, active_palette=4),
-                  Item(type='clothing', amount=1, id='mouth-n_room22019sillymouth', account_bound=False, active_palette=-1),
+                  Item(type='clothing', amount=1, id='mouth-basic2018poutfullpeaked', account_bound=False, active_palette=-1),
 
-                  Item(type='clothing', amount=1, id='hair_front-n_basic2020overshoulderwavy', account_bound=False, active_palette=1),
-                  Item(type='clothing', amount=1, id='hair_back-n_basic2020overshoulderwavy', account_bound=False, active_palette=1),
-
+                  Item(type='clothing', amount=1, id='hair_front-n_basic2020overshoulderwavy', account_bound=False, active_palette=5),
+                  Item(type='clothing', amount=1, id='hair_back-n_basic2020overshoulderwavy', account_bound=False, active_palette=5),
+                  Item(type='clothing', amount=1, id='hat-n_room22019fluffballears_1', account_bound=False, active_palette=-1),
                   Item(type='clothing', amount=1, id='eyebrow-n_basic2018newbrows16', account_bound=False, active_palette=-1),
-                  Item(type='clothing', amount=1, id='eye-n_basic2018teardrop', account_bound=False, active_palette=7),
-                  Item(type='clothing', amount=1, id='shoes-n_registrationavatars2023gothgirlshoes', account_bound=False, active_palette=0),
+                  Item(type='clothing', amount=1, id='eye-n_basic2018teardrop', account_bound=False, active_palette=4),
+                  Item(type='clothing', amount=1, id='shoes-n_drstompsbootsyellow', account_bound=False, active_palette=0),
                   Item(type='clothing', amount=1, id='freckle-n_basic2018freckle35', account_bound=False, active_palette=-1),
                   Item(type='clothing', amount=1, id='freckle-n_basic2018freckle22', account_bound=False, active_palette=-1),
                   Item(type='clothing', amount=1, id='freckle-n_basic2018freckle32', account_bound=False, active_palette=-1),
@@ -2605,36 +2594,22 @@ class MyBot(BaseBot):
 
 
 
-        self.highrise.tg.create_task(self.highrise.walk_to(Position(x=8.5, y=1.5, z=12.5, facing='FrontLeft')))
+
+
+
+
+
+
+
+
+        self.highrise.tg.create_task(self.highrise.walk_to(Position(x=13.5, y=7.0, z=1.5, facing='FrontLeft')))
         self.load_temporary_vips()
 
         while True:
-            await asyncio.sleep(600)
-            await self.highrise.chat("ısudksnsbd")
-            await self.highrise.chat("ısudksnDAAGAsbd")
-            await self.highrise.chat("ısudkGDSGGsnsbd")
-            await self.highrise.chat("ısudSGSGSGksnsbd")
-            await self.highrise.chat("ısudkSGSGsnsbd")
-            await self.highrise.chat("ısudksnSGSGSGsbd")
-            await self.highrise.chat("ısudksSSGSnsbd")
-            await self.highrise.chat("ısudksGSGSGnsbd")
-            await self.highrise.chat("ısudksSGSGSGnsbd")
-            await self.highrise.chat("ısudksSGSGnsbd")
-            await self.highrise.chat("ısudksSGNSBBSFGSnsbd")
-            await self.highrise.chat("ısudkBDFGGSsnsbd")
-            await self.highrise.chat("ısudkFGDGDGsnsbd")
-            await self.highrise.chat("ısudksnsbd")
-            await self.highrise.chat("ısudFSSSGSSksnsbd")
-            await self.highrise.chat("ısudGSGksnsbd")
-            await self.highrise.chat("ısudGSGksnsbd")
-            await self.highrise.chat("ısudkGSSsnsbd")
-            await self.highrise.chat("ısudFSAFASFAksnsbd")
-            await self.highrise.chat("ısudksnsbd")
-            await self.highrise.chat("ısuFAFAFAdksnsbd")
-            await self.highrise.chat("ısudkFAFASWAsnsbd")
-            await self.highrise.chat("ısudksAEAEAnsbd")
+            await asyncio.sleep(5)
+            await self.highrise.chat("💰Welcome in the GIVEAWAY 💰\n\n❗️Check post @Arv.Moon if you want to take part in the 10k g draw❗️\n💕Follow @Arv.Moon💕\n🫶🏻Like and comment post and tag Your 3 friends!🫶🏻\n👑100g to jar = x10 lottery tickets👑\n\n💥GOOD LUCK TO EVERYONE💥\n")
             await self.highrise.send_emote(
-         random.choice(['emoji-flex', 'dance-tiktok10', 'emote-snake', 'emote-roll', 'emote-superpunch', 'emote-kicking', 'idle-floorsleeping2', 'emote-hero', 'idle_layingdown2', 'idle_layingdown', 'dance-sexy', 'emoji-hadoken', 'emote-disappear', 'emote-graceful', 'sit-idle-cute', 'idle-loop-aerobics', 'dance-orangejustice', 'emote-rest', 'dance-martial-artist', 'dance-breakdance', 'emote-astronaut', 'emote-zombierun', 'idle_singing', 'emote- frollicking', 'emote-float', 'emote-kicking', 'emote-ninjarun', 'emote-secrethandshake', 'emote-apart', 'emote-headball', 'dance-floss', 'emote-jetpack', 'emote-ghost-idle', 'dance-spiritual', 'dance-robotic', 'dance-metal', 'idle-loop-tapdance', 'idle-dance-swinging', 'emote-mindblown', 'emote-gangnam', 'emote-harlemshake', 'emote-robot', 'emote-nightfever', 'dance-anime', 'idle-guitar', 'emote-headblowup', 'dance-creepypuppet', 'emote-creepycute', 'emote-sleigh', 'emote-hyped', 'dance-jinglebell', 'idle-nervous', 'idle-toilet', 'emote-timejump', 'sit-relaxed', 'dance-kawai', 'idle-wild', 'emote-iceskating', 'sit-open', 'dance-touch']))
+         random.choice(['dance-anime']))
       
            
 
@@ -2648,7 +2623,7 @@ class MyBot(BaseBot):
 
 
 
-      if user.username == "Moha22_" or user.username == "TOMY_X" or user.username in moderators :
+      if user.username == "Arv.Moon" or user.username == "TOMY_X" or user.username in moderators :
         if reaction == "heart":
           await self.highrise.chat(f"{receiver.username} is now a 👑Permanent👑 VIP, given by {user.username}")
 
@@ -2663,7 +2638,7 @@ class MyBot(BaseBot):
             await self.teleport_user_next_to(target_username, user)
       if reaction =="thumbs"and user.username in moderators:
          target_username = receiver.username
-         if target_username not in ['Moha22_','Moha22_']:
+         if target_username not in ['Arv.Moon','Arv.Moon']:
             await self.teleport_user_next_to(target_username, user)
 
       if reaction =="thumbs"and user.username in moderators:
@@ -2673,7 +2648,7 @@ class MyBot(BaseBot):
 
       
 
-      if user.username == "Moha22_" or user.username == "TOMY_X" :
+      if user.username == "Arv.Moon" or user.username == "TOMY_X" :
           if reaction == "wink":
               await self.highrise.chat(f"{receiver.username} is now a 🎩Temporary🎩 VIP, given by {user.username}")
 
@@ -2683,7 +2658,7 @@ class MyBot(BaseBot):
                     self.save_temporary_vips()
 
 
-      if user.username in ["Moha22_", "TOMY_X"] and reaction == "clap":
+      if user.username in ["Arv.Moon", "TOMY_X"] and reaction == "clap":
             await self.highrise.chat(f"{receiver.username} is remove from the commands by {user.username}")
 
             receiver_username = receiver.username.lower()
@@ -2719,12 +2694,9 @@ class MyBot(BaseBot):
       privileges = await self.highrise.get_room_privilege(user.id)
       print(f"{user.username} joined the room with the privileges {privileges}")
       await asyncio.sleep(5)
-      await self.highrise.teleport(user.id, Position(x=8.5, y=2.25, z=7.5, facing='FrontRight'))
-      joke = random.choice([f"welcome @{user.username} in room grab spin to win 💯"])
-      await self.highrise.chat(f"{joke}")
-      await self.highrise.send_emote(
-         random.choice(['emoji-flex', 'dance-tiktok10', 'emote-snake', 'emote-roll', 'emote-superpunch', 'emote-kicking', 'idle-floorsleeping2', 'emote-hero', 'idle_layingdown2', 'idle_layingdown', 'dance-sexy', 'emoji-hadoken', 'emote-disappear', 'emote-graceful', 'sit-idle-cute', 'idle-loop-aerobics', 'dance-orangejustice', 'emote-rest', 'dance-martial-artist', 'dance-breakdance', 'emote-astronaut', 'emote-zombierun', 'idle_singing', 'emote- frollicking', 'emote-float', 'emote-kicking', 'emote-ninjarun', 'emote-secrethandshake', 'emote-apart', 'emote-headball', 'dance-floss', 'emote-jetpack', 'emote-ghost-idle', 'dance-spiritual', 'dance-robotic', 'dance-metal', 'idle-loop-tapdance', 'idle-dance-swinging', 'emote-mindblown', 'emote-gangnam', 'emote-harlemshake', 'emote-robot', 'emote-nightfever', 'dance-anime', 'idle-guitar', 'emote-headblowup', 'dance-creepypuppet', 'emote-creepycute', 'emote-sleigh', 'emote-hyped', 'dance-jinglebell', 'idle-nervous', 'idle-toilet', 'emote-timejump', 'sit-relaxed', 'dance-kawai', 'idle-wild', 'emote-iceskating', 'sit-open', 'dance-touch']))
-    # print(f"{user.username} joined the room standing at {position}")
+      
+      await self.highrise.send_whisper(user.id, f"Heyo @{user.username}! Welcome in the GIVEAWAY!")
+      
 
 
 
