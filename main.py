@@ -200,7 +200,7 @@ class MyBot(BaseBot):
           await self.highrise.moderate_room(receiver.id, "kick")
           await self.highrise.chat(f"{receiver.username} is Kicked by {user.username}")
       if user.username in moderator and reaction == "heart":
-          await self.highrise.teleport(receiver.id, Position(16,16.55, 11))
+          await self.highrise.teleport(receiver.id, Position(9,9.5, 1))
     async def on_chat(self, user: User, message: str):
         try:
 
