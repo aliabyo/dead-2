@@ -146,8 +146,9 @@ class MyBot(BaseBot):
  
     async def on_start(self, SessionMetadata: SessionMetadata) -> None:
         try:
+            
             await self.highrise.walk_to(Position(0.5, 2,1.5, "FrontRight"))
-
+            await asyncio.sleep(3)
             await self.highrise.chat(" on duty!")
             item = await self.webapi.get_items(item_name="Top Knot") 
             item_id = item.items[0].item_id
@@ -158,7 +159,7 @@ class MyBot(BaseBot):
 
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
         try:     
-            await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️HIGHRICE💎DJDEV🧧TIPS🧧\nMake sure to follow @louiiz , your host & your amazing dj!\nVIP is 100g to bot! \n\n for bots pm @Alionardo_")
+            await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️HIGHRICE💎DJDEV🧧TIPS🧧\nMake sure to follow @Devil_808 , your host & your amazing dj!\nVIP is 100g to bot! \n\n for bots pm @Alionardo_")
             await self.highrise.send_emote('emote-shy2')
 
         except Exception as e:
