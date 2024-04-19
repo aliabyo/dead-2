@@ -252,7 +252,7 @@ class MyBot(BaseBot):
                     if message.startswith("!cage3")and user.username in co_mod:                              
                         await self.highrise.teleport(user_id, Position(15.5,15,25.5))
                     if message.startswith("!dj")and user.username in co_mod:                    
-                        await self.highrise.teleport(user_id, Position((12.5,15.25, 6)) 
+                        await self.highrise.teleport(user_id, Position(12.5,15.25, 6))
                     if message.startswith("!g")and user.username in co_mod:           
                         await self.highrise.teleport(user_id, Position(7.5,0, 11)) 
 
