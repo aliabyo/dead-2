@@ -156,7 +156,7 @@ class MyBot(BaseBot):
             print(f"error : {e}")
 
 
-    async def on_user_join(self, user: User) -> None:
+    async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
         try:     
             await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️HIGHRICE💎DJDEV🧧TIPS🧧\nMake sure to follow @louiiz , your host & your amazing dj!\nVIP is 100g to bot! \n\n for bots pm @Alionardo_")
             await self.highrise.send_emote('emote-shy2')
