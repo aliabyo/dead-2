@@ -137,8 +137,6 @@ class MyBot(BaseBot):
    
     def __init__(self):
       super().__init__()
-      self.load_moderators()
-      self.load_temporary_vips()
       self.maze_players = {}
       self.user_points = {}  # Dictionary to store user points
 
