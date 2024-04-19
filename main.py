@@ -183,8 +183,6 @@ class MyBot(BaseBot):
             "position": Position(requester_position.x, requester_position.y, new_z, requester_position.facing)
           }
           await self.highrise.teleport(user_dict["id"], user_dict["position"])
-
-    async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
     async def on_tip(self, sender: User, receiver: User, tip: CurrencyItem) -> None:
             print(f"{sender.username} tipped {receiver.username} an amount of {tip.amount}")
             await self.highrise.chat(f"Our {sender.username} tipped {receiver.username} amount of {tip.amount}𝐆𝐎𝐋𝐃")
@@ -192,6 +190,8 @@ class MyBot(BaseBot):
             if receiver.username  == "Devil_farm1":
               if tip.amount == 100:
                    await self.highrise.teleport(sender.id, Position(9,9.5, 1))
+    async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
+    
       if reaction =="wink" and user.username in moderator:
          target_username = receiver.username
          if target_username not in ["Alionardo_"]:
