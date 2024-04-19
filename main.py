@@ -220,7 +220,7 @@ class MyBot(BaseBot):
                         await self.highrise.teleport(user.id, Position(15.5,15,25.5))
 
             
-            if message.lstrip().startswith(("!vip","!g","!dj","!cage1","!cage2","!cage2")):
+            if message.lstrip().startswith(("!vip","!g","!dj","!cage1","!cage2","!cage3")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
                 usernames = [user.username.lower() for user in users]
