@@ -148,7 +148,7 @@ class MyBot(BaseBot):
  
     async def on_start(self, SessionMetadata: SessionMetadata) -> None:
         try:
-            await self.highrise.walk_to(Position(7.5, 0,8.5, "FrontRight"))
+            await self.highrise.walk_to(Position(0.5, 2,1.5, "FrontRight"))
 
             await self.highrise.chat(" on duty!")
             item = await self.webapi.get_items(item_name="Top Knot") 
@@ -186,7 +186,6 @@ class MyBot(BaseBot):
 
     async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
     async def on_tip(self, sender: User, receiver: User, tip: CurrencyItem) -> None:
-        try:
             print(f"{sender.username} tipped {receiver.username} an amount of {tip.amount}")
             await self.highrise.chat(f"Our {sender.username} tipped {receiver.username} amount of {tip.amount}𝐆𝐎𝐋𝐃")
 
