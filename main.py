@@ -133,8 +133,11 @@ class Counter:
     usernames = ['Alionardo_']
 
 class MyBot(BaseBot):
-
-   
+    continuous_emote_tasks: Dict[int, asyncio.Task[Any]] = {}  
+    user_data: Dict[int, Dict[str, Any]] = {}
+    continuous_emote_task = None
+    cooldowns = {}  # Class-level variable to store cooldown timestamps
+    emote_looping = False
     def __init__(self):
       super().__init__()
       self.maze_players = {}
@@ -175,7 +178,7 @@ class MyBot(BaseBot):
           del self.continuous_emote_tasks[user_id]
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
         try:     
-            await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️420BUNNIES VIBE/TIPS \nMake sure to follow @babyJmia , your host & your amazing dj!\nVIP is 100g to bot! \n\n for bots pm @Alionardo_")
+            await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️420BUNNIES VIBE/TIPS \nMake sure to follow @babyJmia , your host & your amazing dj!\nVIP is 100g to bot! \n• !list or -list or -help :To check commands, \n for bots pm @Alionardo_")
         except Exception as e:
             print(f"error : {e}")
     async def teleport_user_next_to(self, target_username: str, requester_user: User):
@@ -301,11 +304,22 @@ class MyBot(BaseBot):
   
     async def on_chat(self, user: User, message: str):
         try:
-
+            if message.lower().lstrip().startswith(("-list", "!list","-help")):
+                await self.highrise.chat("\\commands you can use:\n• !emotes or -emotes\n• !loops or -loops \n• -buy or !buy for \n 🎫VIP Tickets🎫 \n• !rules or -rules")
+            if message.lower().lstrip().startswith(("-buy" , "!buy")):
+                await self.highrise.chat(f"\n  vip = 100g for vip 🎫 \nTip 100 to bot you will be teleported instantly. ")
+         
+            if message.lower().lstrip().startswith(("-emotes", "!emotes")):
+                await self.highrise.send_whisper(user.id, "\n• Emote can be used by NUMBERS")
+                await self.highrise.send_whisper(user.id, "\n• For loops say -loop or !loop then the emote number.")         
+            if message.lower().lstrip().startswith(("!loop","-loop")):
+                await self.highrise.send_whisper(user.id,"\n• loops\n ____________________________\nMention loop before the emote numer\n ____________________________")
+            if message.lower().lstrip().startswith(("-teleport", "!teleport")):
+                    await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g : Ground floor \n-dj : DJ setup (only mods and dj)  \n-vip or -v : (vip only), make sure you have 🎫VIP Tickets 🎫 \n• type -buy or !buy for details ")
+            if message.lower().lstrip().startswith(("!rules", "-rules")):
+                   await self.highrise.chat(f"\n\n        RULES\n ____________________________\n 1. NO UNDERAGE \n 2. No advertising\n 3. No hate speech \n 4. No begging (those trash will be immediately banned 🚫) \n 5. No spamming ")
             if message.startswith("-vip")and user.username in co_mod:                              
               await self.highrise.teleport(user.id, Position(15.5,8.5,2.5))
-
-
             if message.startswith("-dj")and user.username in co_mod:                    
               await self.highrise.teleport(user.id, Position(16.5,1,1.5)) 
             if message.startswith("-g"):           
