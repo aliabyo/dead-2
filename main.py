@@ -199,18 +199,18 @@ class MyBot(BaseBot):
           await self.highrise.chat(f"{receiver.username} is Kicked by {user.username}")
       if user.username in moderator and reaction == "heart":
           await self.highrise.teleport(receiver.id, Position(15.5,8.5,2.5))
-      if user.username in moderator and reaction == "thumb":
+      if user.username in moderator and reaction == "thumbs":
           await self.highrise.teleport(receiver.id, Position(16.5,1,1.5))
     async def on_chat(self, user: User, message: str):
         try:
 
-            if message.startswith("vip")and user.username in co_mod:                              
+            if message.startswith("-vip")and user.username in co_mod:                              
               await self.highrise.teleport(user.id, Position(15.5,8.5,2.5))
 
 
-            if message.startswith("dj")and user.username in co_mod:                    
+            if message.startswith("-dj")and user.username in co_mod:                    
               await self.highrise.teleport(user.id, Position(16.5,1,1.5)) 
-            if message.startswith("g"):           
+            if message.startswith("-g"):           
               await self.highrise.teleport(user.id, Position(15,0, 9)) 
         
             
