@@ -236,7 +236,7 @@ class MyBot(BaseBot):
        
         if message.startswith("say"):
              if user.username in moderator :
-                text = message.replace("/say", "").strip()
+                text = message.replace("say", "").strip()
                 await self.highrise.chat(text)
 
    
@@ -262,7 +262,7 @@ class MyBot(BaseBot):
               target_username = message.split("@")[1].strip()
               if target_username.lower() == self.following_username:
                  await self.highrise.send_whisper(user.id,"I am already following.")
-            elif message.startswith("say"):
+        elif message.startswith("say"):
               if user.username in moderator:
                   text = message.replace("say", "").strip()
                   await self.highrise.chat(text)
