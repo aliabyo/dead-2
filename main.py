@@ -184,7 +184,7 @@ class MyBot(BaseBot):
             print(f"{sender.username} tipped {receiver.username} an amount of {tip.amount}")
             await self.highrise.chat(f"Our {sender.username} tipped {receiver.username} amount of {tip.amount}𝐆𝐎𝐋𝐃")
 
-            if receiver.id  == counter_bot.id:
+            if receiver.id  == Counter.bot_id:
               if tip.amount == 100:
                    await self.highrise.teleport(sender.id, Position(15.5,5.5,2.5))
     async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
