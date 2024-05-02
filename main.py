@@ -210,8 +210,7 @@ class MyBot(BaseBot):
     
       if reaction =="wink" and user.username in moderator:
          target_username = receiver.username
-         if target_username not in ['MikeyArkham','babyJmia']:
-            await self.teleport_user_next_to(target_username, user)
+         await self.teleport_user_next_to(target_username, user)
       
       if user.username in moderator and reaction == "wave":
           await self.highrise.moderate_room(receiver.id, "kick")
