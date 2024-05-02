@@ -139,7 +139,7 @@ class MyBot(BaseBot):
       super().__init__()
       self.maze_players = {}
       self.user_points = {}  # Dictionary to store user points
-
+      self.following_username = None
 
 
 
@@ -201,6 +201,83 @@ class MyBot(BaseBot):
           await self.highrise.teleport(receiver.id, Position(15.5,8.5,2.5))
       if user.username in moderator and reaction == "thumbs":
           await self.highrise.teleport(receiver.id, Position(16.5,1,1.5))
+    async def follow_user(self, target_username: str):
+      while self.following_username == target_username:
+
+          response = await self.highrise.get_room_users()
+          target_user_position = None
+          for user_info in response.content:
+              if user_info[0].username.lower() == target_username.lower():
+                  target_user_position = user_info[1]
+                  break
+
+          if target_user_position:
+              nearby_position = Position(target_user_position.x + 1.0, target_user_position.y, target_user_position.z)
+              await self.highrise.walk_to(nearby_position)
+
+              await asyncio.sleep(2)
+   
+    async def on_whisper(self, user: User, message: str ) -> None:
+
+        if message == "here":
+            if user.username in moderator:
+                response = await self.highrise.get_room_users()
+                users = [content for content in response.content]
+                for u in users:
+                    if u[0].id == user.id:
+                        try:
+                            await self.highrise.teleport(Counter.bot_id,Position((u[1].x),(u[1].y),(u[1].z),"FrontRight"))
+
+
+                            break
+                        except:
+
+                            pass
+       
+        if message.startswith("say"):
+             if user.username in moderator :
+                text = message.replace("/say", "").strip()
+                await self.highrise.chat(text)
+
+   
+         
+
+        elif message.startswith("come"):
+           if user.username in moderator :
+                response = await self.highrise.get_room_users()
+                your_pos = None
+                for content in response.content:
+                    if content[0].id == user.id:
+                        if isinstance(content[1], Position):
+                            your_pos = content[1]
+                            break
+                if not your_pos:
+                    await self.highrise.send_whisper(user.id, "Invalid coordinates!")
+                    return
+                await self.highrise.chat(f"@{user.username} I'm coming ..")
+                await self.highrise.walk_to(your_pos)
+
+        elif message.lower().startswith("follow"):
+           if user.username in moderator :
+              target_username = message.split("@")[1].strip()
+
+            if target_username.lower() == self.following_username:
+                await self.highrise.send_whisper(user.id,"I am already following.")
+            elif message.startswith("say"):
+              if user.username in moderator:
+                  text = message.replace("say", "").strip()
+                  await self.highrise.chat(text)
+            else:
+                self.following_username = target_username
+                await self.highrise.chat(f"hey {target_username}.")
+            
+                await self.follow_user(target_username)
+        elif message.lower() == "stop following":
+            self.following_username = None
+          
+            await self.highrise.walk_to(Position(15,0,9,"FrontRight"))
+
+  
     async def on_chat(self, user: User, message: str):
         try:
 
@@ -280,7 +357,7 @@ class MyBot(BaseBot):
                   await self.highrise.send_whisper(user.id, f"The bot wallet contains {wallet[0].amount} {wallet[0].type}")
 
 
-            if message == "!fit": 
+            if message == "!fit0077": 
                shirt = ["shirt-n_starteritems2019tankwhite", "shirt-n_starteritems2019tankblack", "shirt-n_starteritems2019raglanwhite", "shirt-n_starteritems2019raglanblack", "shirt-n_starteritems2019pulloverwhite", "shirt-n_starteritems2019pulloverblack", "shirt-n_starteritems2019maletshirtwhite", "shirt-n_starteritems2019maletshirtblack", "shirt-n_starteritems2019femtshirtwhite", "shirt-n_starteritems2019femtshirtblack", "shirt-n_room32019slouchyredtrackjacket", "shirt-n_room32019malepuffyjacketgreen", "shirt-n_room32019longlineteesweatshirtgrey", "shirt-n_room32019jerseywhite", "shirt-n_room32019hoodiered", "shirt-n_room32019femalepuffyjacketgreen", "shirt-n_room32019denimjackethoodie", "shirt-n_room32019croppedspaghettitankblack", "shirt-n_room22109plaidjacket", "shirt-n_room22109denimjacket", "shirt-n_room22019tuckedtstripes", "shirt-n_room22019overalltop", "shirt-n_room22019denimdress", "shirt-n_room22019bratoppink", "shirt-n_room12019sweaterwithbuttondowngrey", "shirt-n_room12019cropsweaterwhite", "shirt-n_room12019cropsweaterblack", "shirt-n_room12019buttondownblack", "shirt-n_philippineday2019filipinotop", "shirt-n_flashysuit", "shirt-n_SCSpring2018flowershirt", "shirt-n_2016fallblacklayeredbomber", "shirt-n_2016fallblackkknottedtee", "shirt-f_skullsweaterblack", "shirt-f_plaidtiedshirtred", "shirt-f_marchingband"]
                pant = ["shorts-f_pantyhoseshortsnavy", "pants-n_starteritems2019mensshortswhite", "pants-n_starteritems2019mensshortsblue", "pants-n_starteritems2019mensshortsblack", "pants-n_starteritems2019cuffedshortswhite", "pants-n_starteritems2019cuffedshortsblue", "pants-n_starteritems2019cuffedshortsblack", "pants-n_starteritems2019cuffedjeanswhite", "pants-n_starteritems2019cuffedjeansblue", "pants-n_starteritems2019cuffedjeansblack", "pants-n_room32019rippedpantswhite", "pants-n_room32019rippedpantsblue", "pants-n_room32019longtrackshortscamo", "pants-n_room32019longshortswithsocksgrey", "pants-n_room32019longshortswithsocksblack", "pants-n_room32019highwasittrackshortsblack", "pants-n_room32019baggytrackpantsred", "pants-n_room32019baggytrackpantsgreycamo", "pants-n_room22019undiespink", "pants-n_room22019undiesblack", "pants-n_room22019techpantscamo", "pants-n_room22019shortcutoffsdenim", "pants-n_room22019longcutoffsdenim", "pants-n_room12019rippedpantsblue", "pants-n_room12019rippedpantsblack", "pants-n_room12019formalslackskhaki", "pants-n_room12019formalslacksblack", "pants-n_room12019blackacidwashjeans", "pants-n_2016fallgreyacidwashjeans"]
                item_top = random.choice(shirt)
