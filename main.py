@@ -82,7 +82,7 @@ from highrise import *
 from highrise.models import *
 from asyncio import Task
 from highrise.__main__ import *
-
+from emotes import Emotes
 import asyncio
 import contextlib
 import random
@@ -140,10 +140,9 @@ class MyBot(BaseBot):
       self.maze_players = {}
       self.user_points = {}  # Dictionary to store user points
       self.following_username = None
-
-
-
- 
+      self.Emotes = Emotes
+      self.should_stop = False
+        
     async def on_start(self, SessionMetadata: SessionMetadata) -> None:
         try:
             
@@ -156,7 +155,24 @@ class MyBot(BaseBot):
         except Exception as e:
             print(f"error : {e}")
 
+    async def send_continuous_emote(self, emote_text ,user_id,emote_time):
+      try:
+          while True:                    
+                tasks = [asyncio.create_task(self.highrise.send_emote(emote_text, user_id))]
+                await asyncio.wait(tasks)
+                await asyncio.sleep(emote_time)
+                await asyncio.sleep(1)
+      except Exception as e:
+                print(f"{e}")
 
+  
+    async def stop_continuous_emote(self, user_id: int):
+      if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
+          task = self.continuous_emote_tasks[user_id]
+          task.cancel()
+          with contextlib.suppress(asyncio.CancelledError):
+              await task
+          del self.continuous_emote_tasks[user_id]
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
         try:     
             await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️420BUNNIES VIBE/TIPS \nMake sure to follow @babyJmia , your host & your amazing dj!\nVIP is 100g to bot! \n\n for bots pm @Alionardo_")
@@ -216,7 +232,13 @@ class MyBot(BaseBot):
               await self.highrise.walk_to(nearby_position)
 
               await asyncio.sleep(2)
-   
+    async def get_emote_E(self, target) -> None: 
+
+     try:
+        emote_info = self.Emotes.get(target)
+        return emote_info
+     except ValueError:
+        pass
     async def on_whisper(self, user: User, message: str ) -> None:
 
         if message == "here":
@@ -322,9 +344,40 @@ class MyBot(BaseBot):
                 except Exception as e:
                     print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
+            if message.lower().startswith("loop"):
+               parts = message.split()
+               E = parts[1]
+               E = int(E)
+               emote_text, emote_time = await self.get_emote_E(E)
+               emote_time -= 1
+               user_id = user.id  
+               if user.id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user.id].cancelled():
+                  await self.stop_continuous_emote(user.id)
+                  task = asyncio.create_task(self.send_continuous_emote(emote_text,user_id,emote_time))
+                  self.continuous_emote_tasks[user.id] = task
+               else:
+                  task = asyncio.create_task(self.send_continuous_emote(emote_text,user_id,emote_time))
+                  self.continuous_emote_tasks[user.id] = task  
 
-
-
+            elif message.lower().startswith("stop"):
+               if user.id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user.id].cancelled():
+                  await self.stop_continuous_emote(user.id)
+                  await self.highrise.chat("Continuous emote has been stopped.")
+               else:
+                  await self.highrise.chat("You don't have an active loop_emote.")
+            elif message.lower().startswith("users"):
+                room_users = (await self.highrise.get_room_users()).content
+                await self.highrise.chat(f"There are {len(room_users)} users in the room")
+        
+            if  message.isdigit() and 1 <= int(message) <= 91:
+                parts = message.split()
+                E = parts[0]
+                E = int(E)
+                emote_text, emote_time = await self.get_emote_E(E)    
+                tasks = [asyncio.create_task(self.highrise.send_emote(emote_text, user.id))]
+                await asyncio.wait(tasks)
+            
+            
             if message == "!tip1":
               if user.username in moderator:
                 roomUsers = (await self.highrise.get_room_users()).content
