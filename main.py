@@ -325,7 +325,14 @@ class MyBot(BaseBot):
             if message.startswith("-g"):           
               await self.highrise.teleport(user.id, Position(15,0, 9)) 
         
-            
+            if message.startswith("-all vip")and user.username in co_mod: 
+               roomUsers = (await self.highrise.get_room_users()).content
+               for roomUser, _ in roomUsers:
+                  await self.highrise.teleport( roomUser.id,Position(15.5,8.5,2.5))
+            if message.startswith("-all g")and user.username in co_mod: 
+               roomUsers = (await self.highrise.get_room_users()).content
+               for roomUser, _ in roomUsers:
+                  await self.highrise.teleport( roomUser.id,Position(15,0,9))
             if message.lstrip().startswith(("!vip","!g","!dj")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
