@@ -258,12 +258,13 @@ class MyBot(BaseBot):
                 await self.highrise.walk_to(your_pos)
 
         elif message.lower().startswith("follow"):
-           if user.username in moderator :
-              target_username = message.split("@")[1].strip()
-              if target_username.lower() == self.following_username:
-                 await self.highrise.send_whisper(user.id,"I am already following.")
-        elif message.startswith("say"):
-              if user.username in moderator:
+         
+            target_username = message.split("@")[1].strip()
+
+            if target_username.lower() == self.following_username:
+                await self.highrise.send_whisper(user.id,"I am already following.")
+            elif message.startswith("say"):
+              if user.username.lower() in self.moderators:
                   text = message.replace("say", "").strip()
                   await self.highrise.chat(text)
             else:
@@ -274,8 +275,7 @@ class MyBot(BaseBot):
         elif message.lower() == "stop following":
             self.following_username = None
           
-            await self.highrise.walk_to(Position(15,0,9,"FrontRight"))
-
+            await self.highrise.walk_to(Position(15,0,9,"FrontLeft"))
   
     async def on_chat(self, user: User, message: str):
         try:
