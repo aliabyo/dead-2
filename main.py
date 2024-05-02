@@ -186,7 +186,7 @@ class MyBot(BaseBot):
 
             if receiver.id  == Counter.bot_id:
               if tip.amount == 100:
-                   await self.highrise.teleport(sender.id, Position(15.5,5.5,2.5))
+                   await self.highrise.teleport(sender.id, Position(15.5,8.5,2.5))
     async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
     
       if reaction =="wink" and user.username in moderator:
@@ -198,14 +198,14 @@ class MyBot(BaseBot):
           await self.highrise.moderate_room(receiver.id, "kick")
           await self.highrise.chat(f"{receiver.username} is Kicked by {user.username}")
       if user.username in moderator and reaction == "heart":
-          await self.highrise.teleport(receiver.id, Position(15.5,5.5,2.5))
-      if user.username in moderator and reaction == "heart":
+          await self.highrise.teleport(receiver.id, Position(15.5,8.5,2.5))
+      if user.username in moderator and reaction == "thumb":
           await self.highrise.teleport(receiver.id, Position(16.5,1,1.5))
     async def on_chat(self, user: User, message: str):
         try:
 
             if message.startswith("vip")and user.username in co_mod:                              
-              await self.highrise.teleport(user.id, Position(15.5,5.5,2.5))
+              await self.highrise.teleport(user.id, Position(15.5,8.5,2.5))
 
 
             if message.startswith("dj")and user.username in co_mod:                    
@@ -237,7 +237,7 @@ class MyBot(BaseBot):
                     return                     
                 try:
                     if message.startswith("!vip")and user.username in co_mod:                              
-                        await self.highrise.teleport(user_id, Position(15.5,5.5,2.5))
+                        await self.highrise.teleport(user_id, Position(15.5,8.5,2.5))
                     if message.startswith("!dj")and user.username in co_mod:                    
                         await self.highrise.teleport(user_id, Position(16.5,1,1.5))
                     if message.startswith("!g")and user.username in co_mod:           
