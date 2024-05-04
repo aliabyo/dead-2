@@ -206,19 +206,7 @@ class MyBot(BaseBot):
             if receiver.id  == Counter.bot_id:
               if tip.amount == 100:
                    await self.highrise.teleport(sender.id, Position(15.5,8.5,2.5))
-    async def on_reaction(self, user: User, reaction: Reaction, receiver: User) -> None:
-    
-      if reaction =="wink" and user.username in moderator:
-         target_username = receiver.username
-         await self.teleport_user_next_to(target_username, user)
-      
-      if user.username in moderator and reaction == "wave":
-          await self.highrise.moderate_room(receiver.id, "kick")
-          await self.highrise.chat(f"{receiver.username} is Kicked by {user.username}")
-      if user.username in moderator and reaction == "heart":
-          await self.highrise.teleport(receiver.id, Position(15.5,8.5,2.5))
-      if user.username in moderator and reaction == "thumbs":
-          await self.highrise.teleport(receiver.id, Position(16.5,1,1.5))
+  
     async def follow_user(self, target_username: str):
       while self.following_username == target_username:
 
@@ -332,7 +320,7 @@ class MyBot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15,0,9))
-            if message.lstrip().startswith(("!vip","!g","!dj")):
+            if message.lstrip().startswith(("!vip","!g","!dj","here")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
                 usernames = [user.username.lower() for user in users]
@@ -354,6 +342,10 @@ class MyBot(BaseBot):
                     await self.highrise.send_whisper(user.id, f"User {args[0][1:]} not found")
                     return                     
                 try:
+                    
+                    if message.startswith("!here")and user.username in co_mod: 
+                           target_username = user_name
+                           await self.teleport_user_next_to(target_username, user)
                     if message.startswith("!vip")and user.username in co_mod:                              
                         await self.highrise.teleport(user_id, Position(15.5,8.5,2.5))
                     if message.startswith("!dj")and user.username in co_mod:                    
