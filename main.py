@@ -320,7 +320,7 @@ class MyBot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15,0,9))
-            if message.lstrip().startswith(("!vip","!g","!dj","here")):
+            if message.lstrip().startswith(("!v","!g","!dj","!here")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
                 usernames = [user.username.lower() for user in users]
@@ -346,7 +346,7 @@ class MyBot(BaseBot):
                     if message.startswith("!here")and user.username in co_mod: 
                            target_username = user_name
                            await self.teleport_user_next_to(target_username, user)
-                    if message.startswith("!vip")and user.username in co_mod:                              
+                    if message.startswith("!v")and user.username in co_mod:                              
                         await self.highrise.teleport(user_id, Position(15.5,8.5,2.5))
                     if message.startswith("!dj")and user.username in co_mod:                    
                         await self.highrise.teleport(user_id, Position(16.5,1,1.5))
