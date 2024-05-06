@@ -305,14 +305,14 @@ class MyBot(BaseBot):
                     await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g : Ground floor \n-dj : DJ setup (only mods and dj)  \n-vip or -v : (vip only), make sure you have 🎫VIP Tickets 🎫 \n• type -buy or !buy for details ")
             if message.lower().lstrip().startswith(("!rules", "-rules")):
                    await self.highrise.chat(f"\n\n        RULES\n ____________________________\n 1. NO UNDERAGE \n 2. No advertising\n 3. No hate speech \n 4. No begging (those trash will be immediately banned 🚫) \n 5. No spamming ")
-            if message.startswith("-vip")and user.username in co_mod:                              
+            if message.startswith("-v")and user.username in co_mod:                              
               await self.highrise.teleport(user.id, Position(15.5,8.5,2.5))
             if message.startswith("-dj")and user.username in co_mod:                    
               await self.highrise.teleport(user.id, Position(16.5,1,1.5)) 
             if message.startswith("-g"):           
               await self.highrise.teleport(user.id, Position(15,0, 9)) 
         
-            if message.startswith("-all vip")and user.username in co_mod: 
+            if message.startswith("-all v")and user.username in co_mod: 
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15.5,8.5,2.5))
