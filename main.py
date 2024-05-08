@@ -231,7 +231,7 @@ class MyBot(BaseBot):
         pass
     async def on_whisper(self, user: User, message: str ) -> None:
 
-        if message == "here":
+        if message == "!h":
             if user.username in moderator:
                 response = await self.highrise.get_room_users()
                 users = [content for content in response.content]
@@ -246,15 +246,15 @@ class MyBot(BaseBot):
 
                             pass
        
-        if message.startswith("say"):
+        if message.startswith("!s"):
              if user.username in moderator :
-                text = message.replace("say", "").strip()
+                text = message.replace("!s", "").strip()
                 await self.highrise.chat(text)
 
    
          
 
-        elif message.startswith("come"):
+        elif message.startswith("!c"):
            if user.username in moderator :
                 response = await self.highrise.get_room_users()
                 your_pos = None
@@ -269,7 +269,7 @@ class MyBot(BaseBot):
                 await self.highrise.chat(f"@{user.username} I'm coming ..")
                 await self.highrise.walk_to(your_pos)
 
-        elif message.lower().startswith("follow"):
+        elif message.lower().startswith("!f"):
          
             target_username = message.split("@")[1].strip()
 
