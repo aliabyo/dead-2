@@ -326,7 +326,7 @@ class MyBot(BaseBot):
                 usernames = [user.username.lower() for user in users]
                 parts = message[1:].split()
                 args = parts[1:]
-
+                user_name = next((u.username.lower() for u in users if u.username.lower() == args[0][1:].lower()), None)
                 if len(args) < 1:
                     await self.highrise.send_whisper(user.id, f"Kullanım: !{parçalar[0]} <@Alionardo_>")
                     return
