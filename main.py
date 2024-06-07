@@ -14,6 +14,7 @@ from highrise.models import SessionMetadata, User, Item, Position, CurrencyItem,
 from datetime import datetime, timedelta
 from highrise.models import SessionMetadata
 import re
+from emotes import Emotes
 from highrise.models import SessionMetadata,  GetMessagesRequest, User ,Item, Position, CurrencyItem, Reaction
 from typing import Any, Dict, Union
 from highrise.__main__ import *
