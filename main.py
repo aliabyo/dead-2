@@ -379,7 +379,7 @@ class MyBot(BaseBot):
                  self.continuous_emote_tasks[roomUser.id] = task
 
             elif message.lower().startswith("!stop all"):
-              if user.username in moderator:
+              if user.username.lower() in moderator:
                  room_users = (await self.highrise.get_room_users()).content
                  user_count = len(room_users)
                  await self.highrise.chat("All looping emotes have been stopped.")
