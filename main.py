@@ -1,120 +1,24 @@
-import random
-import time
-from highrise import BaseBot, Position, User, AnchorPosition, GetMessagesRequest
-import asyncio, random
-from highrise.__main__ import *
-from highrise import BaseBot, Highrise, Position, AnchorPosition, Reaction
-from highrise import __main__
-from asyncio import run as arun
-import asyncio
-from random import choice
-from json import load, dump
-from time import time
-from math import sqrt
-from highrise import BaseBot, User, Position, AnchorPosition
-import json
-from typing import List
-from datetime import datetime, timedelta
-from highrise.models import SessionMetadata
-import re
-from highrise.models import SessionMetadata, User, Item, Position, CurrencyItem, Reaction
-from typing import Union
-import random
-import time
-from highrise import BaseBot, Highrise, Position, AnchorPosition, Reaction
-from highrise import __main__
-from asyncio import run as arun
-import asyncio
-from random import choice
-import json
-from typing import List
-from datetime import datetime, timedelta
-from highrise.models import SessionMetadata
-import re
-from highrise.models import SessionMetadata, User, Item, Position, CurrencyItem, Reaction
-from typing import Any, Dict, Union
-import random
-import time
-from highrise import BaseBot, Highrise, Position, AnchorPosition, Reaction
-from highrise import __main__
-from asyncio import run as arun
-import asyncio
-from random import choice
-import json
-from typing import List
-from datetime import datetime, timedelta
-from highrise.models import SessionMetadata
-import re
-
-from highrise.models import SessionMetadata, User, Item, Position, CurrencyItem, Reaction
-from highrise import BaseBot, Position
-from highrise import __main__
-from highrise.models import Item
-from asyncio import run as arun
-from highrise.models import AnchorPosition
-import requests
-from highrise import BaseBot, __main__
-from highrise.models import (AnchorPosition, Item, Position, User,)
-from highrise import BaseBot
-from collections import UserDict
-from highrise.models import SessionMetadata, User
-from json import load, dump
-from time import time
-from math import sqrt
-from highrise import BaseBot, User, Position, AnchorPosition
-from highrise.models import Position
-from highrise.models import SessionMetadata, User, CurrencyItem, Item, AnchorPosition, Reaction, ModerateRoomRequest, Position
-import random
-from highrise import *
-from highrise.models import *
-import asyncio
-from asyncio import Task
-from typing import Union
-import asyncio
-import contextlib
-import random
-from typing import Any, Dict, Union
-from importlib.machinery import ModuleSpec
-from click.decorators import pass_context
-from highrise import BaseBot
-from typing import Any, Dict, Union
-from highrise import *
-from highrise.models import *
-from asyncio import Task
-from highrise.__main__ import *
-from emotes import Emotes
-import asyncio
-import contextlib
-import random
-from typing import Any, Dict, Union
-from importlib.machinery import ModuleSpec
-from click.decorators import pass_context
-from highrise import BaseBot
-from typing import Any, Dict, Union
-from highrise import *
-from highrise.models import *
-from asyncio import Task
-from highrise.__main__ import *
-from highrise.models import (
-    AnchorPosition,
-    Item,
-    Position,
-    SessionMetadata,
-    User,
-)
-from highrise.models import (
-    CurrencyItem,
-    GetMessagesRequest,
-    Item,
-    SessionMetadata,
-)
-import random
-import requests
 import os
-import importlib
+import random
+import time
+from highrise import BaseBot, Highrise, Position, AnchorPosition, Reaction
+from highrise import __main__
+from asyncio import run as arun
 import asyncio
-import contextlib
-import logging
+from random import choice
+import json
+from datetime import datetime, timedelta
+from highrise.models import SessionMetadata
+import re
+from highrise.models import SessionMetadata, User, Item, Position, CurrencyItem, Reaction
+from datetime import datetime, timedelta
+from highrise.models import SessionMetadata
+import re
+from highrise.models import SessionMetadata,  GetMessagesRequest, User ,Item, Position, CurrencyItem, Reaction
+from typing import Any, Dict, Union
+from highrise.__main__ import *
+import asyncio, random
+import requests
 from highrise import BaseBot, AnchorPosition, Position, User, TaskGroup
 moderator = ['babyJmia', 'Alionardo_','MikeyArkham']
 co_mod = ['Alionardo_','MikeyArkham','babyJmia']
