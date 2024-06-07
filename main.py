@@ -221,7 +221,7 @@ class MyBot(BaseBot):
             if message.lower().lstrip().startswith(("-emotes", "!emotes")):
                 await self.highrise.send_whisper(user.id, "\n• Emote can be used by NUMBERS")
                 await self.highrise.send_whisper(user.id, "\n• For loops say -loop or !loop then the emote number.")         
-            if message.lower().lstrip().startswith(("!loop","-loop")):
+            if message.lower().lstrip().startswith(("!loops","-loops")):
                 await self.highrise.send_whisper(user.id,"\n• loops\n ____________________________\nMention loop before the emote numer\n ____________________________")
             if message.lower().lstrip().startswith(("-teleport", "!teleport")):
                     await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g : Ground floor \n-dj : DJ setup (only mods and dj)  \n-vip or -v : (vip only), make sure you have 🎫VIP Tickets 🎫 \n• type -buy or !buy for details ")
