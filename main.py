@@ -74,14 +74,17 @@ class MyBot(BaseBot):
                 print(f"{e}")
 
   
-    async def stop_continuous_emote(self, user_id: int):
-      if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
-          task = self.continuous_emote_tasks[user_id]
-          task.cancel()
-          with contextlib.suppress(asyncio.CancelledError):
-              await task
-          del self.continuous_emote_tasks[user_id]
-          self.continuous_emote_tasks = {}
+    async def stop_all_loops(self):
+     user_ids = [user.id for user, _ in (await self.highrise.get_room_users()).content]
+     user_ids.append(Counter.bot_id)
+     for user_id in user_ids:
+        if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
+            task = self.continuous_emote_tasks[user_id]
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+            del self.continuous_emote_tasks[user_id]
+     self.continuous_emote_tasks = {}
     async def stop_continuous_emote(self, user_id: int):
           if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
               task = self.continuous_emote_tasks[user_id]
