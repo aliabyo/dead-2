@@ -81,6 +81,14 @@ class MyBot(BaseBot):
           with contextlib.suppress(asyncio.CancelledError):
               await task
           del self.continuous_emote_tasks[user_id]
+          self.continuous_emote_tasks = {}
+    async def stop_continuous_emote(self, user_id: int):
+          if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
+              task = self.continuous_emote_tasks[user_id]
+              task.cancel()
+              with contextlib.suppress(asyncio.CancelledError):
+                  await task
+              del self.continuous_emote_tasks[user_id]
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
         try:     
             await self.highrise.send_whisper(user.id,f"Hey {user.username}\nwelcome to ️420BUNNIES VIBE/TIPS \nMake sure to follow @babyJmia , your host & your amazing dj!\nVIP is 100g to bot! \n• !list or -list or -help :To check commands, \n for bots pm @Alionardo_")
