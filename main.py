@@ -346,7 +346,7 @@ class MyBot(BaseBot):
                   wallet = (await self.highrise.get_wallet()).content
                   await self.highrise.send_whisper(user.id, f"The bot wallet contains {wallet[0].amount} {wallet[0].type}")
 
-            if message.lower().startswith("-loop all") and user.username.lower() in self.moderators:
+            if message.lower().startswith("-loop all") and user.username.lower() in moderators:
               parts = message.split()
               if len(parts) < 2:
                 await self.highrise.chat("Please provide an emote ID.")
@@ -368,7 +368,7 @@ class MyBot(BaseBot):
                  self.continuous_emote_tasks[roomUser.id] = task
 
             elif message.lower().startswith("-stop all"):
-              if user.username.lower() in self.moderators:
+              if user.username.lower() in moderators:
                  room_users = (await self.highrise.get_room_users()).content
                  user_count = len(room_users)
                  await self.highrise.chat("All looping emotes have been stopped.")
