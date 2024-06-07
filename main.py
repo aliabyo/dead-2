@@ -341,7 +341,7 @@ class MyBot(BaseBot):
                   await self.highrise.tip_user(roomUser.id, "gold_bar_50")
 
 
-            if message.lower().startswith(("!wallet","-wallet","wallet"):
+            if message.lower().startswith(("!wallet","-wallet","wallet")):
                 if user.username in moderator:
                   wallet = (await self.highrise.get_wallet()).content
                   await self.highrise.send_whisper(user.id, f"The bot wallet contains {wallet[0].amount} {wallet[0].type}")
