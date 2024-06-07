@@ -193,7 +193,24 @@ class MyBot(BaseBot):
             self.following_username = None
           
             await self.highrise.walk_to(Position(15,0,9,"FrontLeft"))
-  
+    async def stop_all_loops(self):
+      user_ids = [user.id for user, _ in (await self.highrise.get_room_users()).content]
+      user_ids.append(Counter.bot_id)
+      for user_id in user_ids:
+        if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
+            task = self.continuous_emote_tasks[user_id]
+            task.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await task
+            del self.continuous_emote_tasks[user_id]
+      self.continuous_emote_tasks = {}
+    async def stop_continuous_emote(self, user_id: int):
+          if user_id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user_id].cancelled():
+              task = self.continuous_emote_tasks[user_id]
+              task.cancel()
+              with contextlib.suppress(asyncio.CancelledError):
+                  await task
+              del self.continuous_emote_tasks[user_id]
     async def on_chat(self, user: User, message: str):
         try:
             if message.lower().lstrip().startswith(("-list", "!list","-help")):
@@ -221,6 +238,10 @@ class MyBot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15.5,8.5,2.5))
+            if message.startswith("!all dj")and user.username in co_mod: 
+               roomUsers = (await self.highrise.get_room_users()).content
+               for roomUser, _ in roomUsers:
+                  await self.highrise.teleport( roomUser.id,Position(16.5,1,1.5))
             if message.startswith("!all g")and user.username in co_mod: 
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
@@ -320,12 +341,39 @@ class MyBot(BaseBot):
                   await self.highrise.tip_user(roomUser.id, "gold_bar_50")
 
 
-            if message.lower().startswith("wallet"):
+            if message.lower().startswith(("!wallet","-wallet","wallet"):
                 if user.username in moderator:
                   wallet = (await self.highrise.get_wallet()).content
                   await self.highrise.send_whisper(user.id, f"The bot wallet contains {wallet[0].amount} {wallet[0].type}")
 
+            if message.lower().startswith("-loop all") and user.username.lower() in self.moderators:
+              parts = message.split()
+              if len(parts) < 2:
+                await self.highrise.chat("Please provide an emote ID.")
+                return
+              try:
+               E = int(parts[2])
+              except ValueError:
+                await self.highrise.chat("Invalid emote ID.")
+                return
+              emote_text, emote_time = await self.get_emote_E(E)
+              emote_time -= 1
+              roomUsers = (await self.highrise.get_room_users()).content
+              await self.highrise.chat("All looping.")
+              for roomUser, _ in roomUsers:
+                 if roomUser.id in self.continuous_emote_tasks and not self.continuous_emote_tasks[roomUser.id].cancelled():
+                    await self.stop_continuous_emote(roomUser.id)
+               
+                 task = asyncio.create_task(self.send_continuous_emote(emote_text, roomUser.id, emote_time))
+                 self.continuous_emote_tasks[roomUser.id] = task
 
+            elif message.lower().startswith("-stop all"):
+              if user.username.lower() in self.moderators:
+                 room_users = (await self.highrise.get_room_users()).content
+                 user_count = len(room_users)
+                 await self.highrise.chat("All looping emotes have been stopped.")
+                 for _ in range(user_count):
+                     await self.stop_all_loops()
             if message == "!fit0077": 
                shirt = ["shirt-n_starteritems2019tankwhite", "shirt-n_starteritems2019tankblack", "shirt-n_starteritems2019raglanwhite", "shirt-n_starteritems2019raglanblack", "shirt-n_starteritems2019pulloverwhite", "shirt-n_starteritems2019pulloverblack", "shirt-n_starteritems2019maletshirtwhite", "shirt-n_starteritems2019maletshirtblack", "shirt-n_starteritems2019femtshirtwhite", "shirt-n_starteritems2019femtshirtblack", "shirt-n_room32019slouchyredtrackjacket", "shirt-n_room32019malepuffyjacketgreen", "shirt-n_room32019longlineteesweatshirtgrey", "shirt-n_room32019jerseywhite", "shirt-n_room32019hoodiered", "shirt-n_room32019femalepuffyjacketgreen", "shirt-n_room32019denimjackethoodie", "shirt-n_room32019croppedspaghettitankblack", "shirt-n_room22109plaidjacket", "shirt-n_room22109denimjacket", "shirt-n_room22019tuckedtstripes", "shirt-n_room22019overalltop", "shirt-n_room22019denimdress", "shirt-n_room22019bratoppink", "shirt-n_room12019sweaterwithbuttondowngrey", "shirt-n_room12019cropsweaterwhite", "shirt-n_room12019cropsweaterblack", "shirt-n_room12019buttondownblack", "shirt-n_philippineday2019filipinotop", "shirt-n_flashysuit", "shirt-n_SCSpring2018flowershirt", "shirt-n_2016fallblacklayeredbomber", "shirt-n_2016fallblackkknottedtee", "shirt-f_skullsweaterblack", "shirt-f_plaidtiedshirtred", "shirt-f_marchingband"]
                pant = ["shorts-f_pantyhoseshortsnavy", "pants-n_starteritems2019mensshortswhite", "pants-n_starteritems2019mensshortsblue", "pants-n_starteritems2019mensshortsblack", "pants-n_starteritems2019cuffedshortswhite", "pants-n_starteritems2019cuffedshortsblue", "pants-n_starteritems2019cuffedshortsblack", "pants-n_starteritems2019cuffedjeanswhite", "pants-n_starteritems2019cuffedjeansblue", "pants-n_starteritems2019cuffedjeansblack", "pants-n_room32019rippedpantswhite", "pants-n_room32019rippedpantsblue", "pants-n_room32019longtrackshortscamo", "pants-n_room32019longshortswithsocksgrey", "pants-n_room32019longshortswithsocksblack", "pants-n_room32019highwasittrackshortsblack", "pants-n_room32019baggytrackpantsred", "pants-n_room32019baggytrackpantsgreycamo", "pants-n_room22019undiespink", "pants-n_room22019undiesblack", "pants-n_room22019techpantscamo", "pants-n_room22019shortcutoffsdenim", "pants-n_room22019longcutoffsdenim", "pants-n_room12019rippedpantsblue", "pants-n_room12019rippedpantsblack", "pants-n_room12019formalslackskhaki", "pants-n_room12019formalslacksblack", "pants-n_room12019blackacidwashjeans", "pants-n_2016fallgreyacidwashjeans"]
