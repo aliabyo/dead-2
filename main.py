@@ -292,7 +292,19 @@ class Bot(BaseBot):
                         await self.highrise.teleport(user_id, Position(16.5,1,1.5))
                     if message.startswith("!g")and user.username in co_mod:           
                         await self.highrise.teleport(user_id, Position(15,0, 9)) 
-
+                    if message.startswith("!tip1") and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_1")
+                    if message.startswith("!tip5")and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_5")
+                    if message.startswith("!tip10") and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_10")
+                    if message.startswith("!tip50") and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_50")
+                    if message.startswith("!tip100") and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_100")
+                    if message.startswith("!tip500")and user.username in co_mod:                 
+                        await self.highrise.tip_user(user_id, "gold_bar_500")
+  
                 except Exception as e:
                     print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
