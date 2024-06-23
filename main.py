@@ -37,7 +37,7 @@ class Counter:
     static_ctr = 0
     usernames = ['Alionardo_']
 
-class MyBot(BaseBot):
+class Bot(BaseBot):
     continuous_emote_tasks: Dict[int, asyncio.Task[Any]] = {}  
     user_data: Dict[int, Dict[str, Any]] = {}
     continuous_emote_task = None
