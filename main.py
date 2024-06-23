@@ -62,7 +62,10 @@ class MyBot(BaseBot):
             print(item_id)
         except Exception as e:
             print(f"error : {e}")
-
+    async def run_bot(self, room_id, api_key) -> None:
+      asyncio.create_task(self.place_bot())
+      definitions = [BotDefinition(self, room_id, api_key)]
+      await __main__.main(definitions)
     async def send_continuous_emote(self, emote_text ,user_id,emote_time):
       try:
           while True:                    
