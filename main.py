@@ -242,7 +242,7 @@ class MyBot(BaseBot):
               await self.highrise.teleport(user.id, Position(15.5,8.5,2.5))
             if message.startswith("-dj")and user.username in co_mod:                    
               await self.highrise.teleport(user.id, Position(16.5,1,1.5)) 
-            if message.startswith("-g"))and user.username in co_mod: 
+            if message.startswith("-g")and user.username in co_mod: 
               await self.highrise.teleport(user.id, Position(15,0, 9)) 
         
             if message.startswith("!all v")and user.username in co_mod: 
