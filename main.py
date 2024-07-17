@@ -260,7 +260,7 @@ class Bot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(11.5,17,5.5))
-           if message.startswith("!all v2")and user.username in co_mod: 
+            if message.startswith("!all v2")and user.username in co_mod: 
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(17.5,20,1.5))
