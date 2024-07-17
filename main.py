@@ -249,7 +249,7 @@ class Bot(BaseBot):
               await self.highrise.teleport(user.id, Position(15,0, 9)) 
             if message.startswith("-h")and user.username in co_mod: 
               await self.highrise.teleport(user.id, Position(11.5,17,5.5)) 
-            if message.startswith("-v2")and user.username in co_mod: 
+            if message.startswith("-r")and user.username in co_mod: 
               await self.highrise.teleport(user.id, Position(17.5,20,1.5)) 
         
             if message.startswith("!all v")and user.username in co_mod: 
@@ -260,7 +260,7 @@ class Bot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(11.5,17,5.5))
-            if message.startswith("!all v2")and user.username in co_mod: 
+            if message.startswith("!all r")and user.username in co_mod: 
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(17.5,20,1.5))
@@ -272,7 +272,7 @@ class Bot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15,0,9))
-            if message.lstrip().startswith(("!v","!g","!dj","!h","v2","!here")):
+            if message.lstrip().startswith(("!v","!g","!dj","!h","r","!here")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
                 usernames = [user.username.lower() for user in users]
@@ -306,7 +306,7 @@ class Bot(BaseBot):
                         await self.highrise.teleport(user_id, Position(15,0, 9))
                     if message.startswith("!h")and user.username in co_mod:           
                         await self.highrise.teleport(user_id, Position(11.5,17,5.5))
-                    if message.startswith("!v2")and user.username in co_mod:           
+                    if message.startswith("!r")and user.username in co_mod:           
                         await self.highrise.teleport(user_id, Position(17.5,20,1.5))
                     if message.startswith("!tip1") and user.username in co_mod:                 
                         await self.highrise.tip_user(user_id, "gold_bar_1")
