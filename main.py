@@ -272,7 +272,7 @@ class Bot(BaseBot):
                roomUsers = (await self.highrise.get_room_users()).content
                for roomUser, _ in roomUsers:
                   await self.highrise.teleport( roomUser.id,Position(15,0,9))
-            if message.lstrip().startswith(("!v","!g","!dj","!h","r","!here")):
+            if message.lstrip().startswith(("!v","!g","!dj","!h","!r","!here")):
                 response = await self.highrise.get_room_users()
                 users = [content[0] for content in response.content]
                 usernames = [user.username.lower() for user in users]
