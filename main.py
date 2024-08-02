@@ -141,22 +141,22 @@ class Bot(BaseBot):
         except ValueError:
             pass
 
-
+    async def spam(self)
+     while True:
+            await self.highrise.chat("Welcome to FIND A DATE")
+            await asyncio.sleep(20)
     async def on_start(self, session_metadata: SessionMetadata) -> None:
       try:
          asyncio.create_task(self.dance_floor())
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...")
-       
-
+         asyncio.creat_task(self.spam())
          self.highrise.tg.create_task(self.highrise.walk_to(Position(7,0,7, facing='FrontRight')))
          await asyncio.sleep(10)
          await self.highrise.chat(f"Deployed")
          if Counter.bot_id not in self.dancer:
            self.dancer.append(Counter.bot_id)
-         while True:
-            await self.highrise.chat("Welcome to FIND A DATE")
-            await asyncio.sleep(2)
+         
       except Exception as e:
           print(f"An exception occured: {e}")  
     async def on_emote(self, user: User ,emote_id : str , receiver: User | None )-> None:
