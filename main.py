@@ -19,8 +19,6 @@ from highrise.__main__ import *
 import asyncio, random
 from emotes import Emotes
 from emotes import Dance_Floor
-owners = ['alionardo_','the_realcat']
-moderators = ['alionardo_','the_realcat']
 
 class BotDefinition:
     
