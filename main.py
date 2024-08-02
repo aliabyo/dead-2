@@ -59,9 +59,9 @@ class Bot(BaseBot):
             item_id = item.items[0].item_id
             print(item_id)
 
-        while True:
-            await self.highrise.chat("Welcome to FIND A DATE")
-            await asyncio.sleep(2)
+            while True:
+              await self.highrise.chat("Welcome to FIND A DATE")
+              await asyncio.sleep(2)
         except Exception as e:
             print(f"error : {e}")
     async def run_bot(self, room_id, api_key) -> None:
