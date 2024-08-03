@@ -141,7 +141,7 @@ class Bot(BaseBot):
         except ValueError:
             pass
 
-    async def spam(self)
+    async def spam(self):
      while True:
             await self.highrise.chat("Welcome to FIND A DATE")
             await asyncio.sleep(20)
