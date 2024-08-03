@@ -150,7 +150,7 @@ class Bot(BaseBot):
          asyncio.create_task(self.dance_floor())
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...")
-         asyncio.creat_task(self.spam())
+         asyncio.create_task(self.spam()) 
          self.highrise.tg.create_task(self.highrise.walk_to(Position(7,0,7, facing='FrontRight')))
          await asyncio.sleep(10)
          await self.highrise.chat(f"Deployed")
